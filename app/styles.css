@@ -1,0 +1,154 @@
+/* Neon Coast Cover Studio — dark studio UI, sunset accents, offline only. */
+@font-face {
+  font-family: "Anton";
+  src: url("./fonts/Anton-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Pacifico";
+  src: url("./fonts/Pacifico-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+:root {
+  --bg: #150a24;
+  --panel: #211335;
+  --panel-2: #2b1a44;
+  --line: #3d2560;
+  --ink: #f5eefc;
+  --muted: #b9a8d4;
+  --pink: #ff4d8d;
+  --orange: #ff8a3d;
+  --gold: #ffc93d;
+  --teal: #2ee6c8;
+  --radius: 12px;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; min-height: 100%; }
+body {
+  background: linear-gradient(160deg, #150a24 0%, #241040 55%, #3a1040 100%);
+  color: var(--ink);
+  font: 15px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.topbar {
+  display: flex; flex-wrap: wrap; gap: 16px; align-items: center;
+  justify-content: space-between; padding: 16px 22px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(20, 10, 36, 0.7);
+}
+.brand { display: flex; gap: 14px; align-items: center; }
+.brand-mark {
+  width: 52px; height: 52px; border-radius: 12px; flex: none;
+  display: grid; place-items: center;
+  font-family: "Anton", sans-serif; font-size: 24px; letter-spacing: 1px;
+  color: #1a0b2e;
+  background: linear-gradient(135deg, var(--gold), var(--orange) 45%, var(--pink));
+  box-shadow: 0 0 24px rgba(255, 77, 141, 0.45);
+}
+.brand h1 {
+  margin: 0; font-family: "Anton", sans-serif; font-weight: 400;
+  font-size: 26px; letter-spacing: 2px; text-transform: uppercase;
+  background: linear-gradient(90deg, var(--gold), var(--pink) 60%, var(--teal));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.brand p { margin: 2px 0 0; color: var(--muted); font-size: 13px; }
+.top-actions { display: flex; gap: 8px; }
+
+.studio {
+  display: grid; grid-template-columns: 340px minmax(0, 1fr);
+  gap: 20px; padding: 20px 22px 32px; align-items: start;
+}
+.controls { display: flex; flex-direction: column; gap: 14px; }
+.group {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 14px 16px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.group h2 {
+  margin: 0; font-family: "Anton", sans-serif; font-weight: 400;
+  font-size: 15px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold);
+}
+.group label { display: flex; flex-direction: column; gap: 5px; font-weight: 600; font-size: 13px; }
+.group label.check { flex-direction: row; align-items: center; gap: 8px; font-weight: 400; }
+.hint { margin: 0; color: var(--muted); font-size: 13px; }
+
+input[type="text"], select {
+  font: inherit; color: var(--ink); background: var(--panel-2);
+  border: 1px solid var(--line); border-radius: 8px; padding: 9px 10px; width: 100%;
+}
+input[type="text"]:focus, select:focus { outline: 2px solid var(--pink); outline-offset: 1px; }
+input[type="range"] { width: 100%; accent-color: var(--pink); }
+.file-label {
+  cursor: pointer; text-align: center; padding: 10px;
+  border: 1px dashed var(--pink); border-radius: 8px; color: var(--ink);
+}
+.file-label input { display: none; }
+
+button {
+  font: inherit; font-weight: 700; color: var(--ink);
+  background: var(--panel-2); border: 1px solid var(--line);
+  border-radius: 8px; padding: 9px 12px; cursor: pointer;
+}
+button:hover { border-color: var(--pink); }
+button.primary {
+  background: linear-gradient(90deg, var(--pink), var(--orange));
+  border: 0; color: #fff;
+}
+button.primary.big { padding: 13px; font-size: 16px; }
+button[aria-pressed="true"], button.active {
+  background: linear-gradient(90deg, var(--pink), var(--orange));
+  border-color: transparent; color: #fff;
+}
+button:disabled { opacity: 0.45; cursor: default; }
+
+.chip-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip-row button { padding: 7px 10px; font-size: 13px; border-radius: 999px; }
+.grade-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.grade-row button { padding: 8px 6px; font-size: 12.5px; }
+.grade-row button .sw {
+  display: block; height: 10px; border-radius: 5px; margin-bottom: 5px;
+}
+.photo-tray { display: flex; flex-wrap: wrap; gap: 8px; }
+.photo-tray img {
+  width: 64px; height: 64px; object-fit: cover; border-radius: 8px;
+  border: 2px solid var(--line); cursor: pointer;
+}
+.photo-tray img.active { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold); }
+.sample-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 13px; color: var(--muted); }
+.sample-row button { padding: 6px 9px; font-size: 12.5px; }
+.sliders { display: flex; flex-direction: column; gap: 8px; }
+.panel-row { display: flex; gap: 8px; align-items: center; font-size: 13px; }
+.panel-row .chip-row button { min-width: 34px; }
+
+.stage { position: sticky; top: 16px; }
+.canvas-wrap {
+  position: relative; border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 77, 141, 0.15);
+  background: #0d0618;
+}
+#cover { display: block; width: 100%; height: auto; cursor: grab; touch-action: none; }
+#cover:active { cursor: grabbing; }
+.panel-hint {
+  position: absolute; right: 10px; bottom: 10px;
+  background: rgba(13, 6, 24, 0.85); border: 1px solid var(--line);
+  padding: 6px 10px; border-radius: 999px; font-size: 12.5px; color: var(--muted);
+}
+.stage-note { color: var(--muted); font-size: 13px; margin: 10px 2px 0; }
+
+#status { margin: 0; color: var(--teal); font-size: 13px; min-height: 18px; }
+
+@media (max-width: 900px) {
+  .studio { grid-template-columns: 1fr; }
+  .stage { position: static; }
+}
+
+/* Screenshot scenes: cover-only hides the editor chrome. */
+body.shot-cover .topbar, body.shot-cover .controls, body.shot-cover .stage-note { display: none; }
+body.shot-cover .studio { display: block; padding: 0; }
+body.shot-cover .stage { position: static; }
+body.shot-cover .canvas-wrap { border: 0; border-radius: 0; box-shadow: none; }
+body.shot-cover #cover { width: 100vw; height: 100vh; object-fit: contain; background: #0d0618; }
+body.shot-cover .panel-hint { display: none; }
