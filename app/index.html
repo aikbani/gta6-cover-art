@@ -1,120 +1,116 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Neon Coast Cover Studio — GTA-style cover art maker</title>
 <link rel="icon" href="data:,">
-<link rel="stylesheet" href="./styles.css">
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <header class="topbar">
   <div class="brand">
     <span class="brand-mark">NC</span>
     <div>
-      <h1>Neon Coast Cover Studio</h1>
-      <p>Your photo + a caption &rarr; GTA-style multi-panel cover art. 100% offline — photos never leave this machine.</p>
+      <h1>Neon Coast <span>Cover Studio</span></h1>
+      <p>Turn a photo + a caption into multi-panel cover art. 100% offline.</p>
     </div>
   </div>
   <div class="top-actions">
-    <button id="makeCover" type="button" class="primary">Make my cover</button>
-    <button id="undoBtn" type="button" title="Undo">Undo</button>
-    <button id="redoBtn" type="button" title="Redo">Redo</button>
+    <button id="btn-magic" class="btn btn-magic" type="button">✦ Make my cover</button>
+    <button id="btn-undo" class="btn" type="button" title="Undo">↩ Undo</button>
+    <button id="btn-redo" class="btn" type="button" title="Redo">↪ Redo</button>
   </div>
 </header>
 
 <main class="studio">
-  <section class="controls" aria-label="Cover controls">
-    <div class="group">
+  <aside class="panel controls" aria-label="Cover controls">
+    <section>
       <h2>1 · Photos</h2>
-      <label class="file-label">Add your photos
-        <input id="photoInput" type="file" accept="image/*" multiple>
-      </label>
-      <div id="photoTray" class="photo-tray" aria-label="Loaded photos"></div>
-      <div class="sample-row">
-        <span>Try a sample:</span>
-        <button type="button" data-sample="boardwalk">Boardwalk sunset</button>
-        <button type="button" data-sample="neon-street">Neon street</button>
-        <button type="button" data-sample="pier">Pier sunrise</button>
-      </div>
-      <label class="check"><input id="fillOne" type="checkbox" checked>
-        Fill every panel with one photo (different crops)</label>
-    </div>
+      <label class="upload" for="file-input">＋ Add up to 4 of your photos</label>
+      <input id="file-input" type="file" accept="image/*" multiple hidden>
+      <div id="photo-strip" class="photo-strip" role="listbox" aria-label="Photos"></div>
+      <label class="check"><input id="opt-fill-one" type="checkbox"> Fill every panel with one photo</label>
+      <p class="hint">Click a thumbnail to use it in the selected panel. Drag a photo onto the preview to drop it in a panel.</p>
+    </section>
 
-    <div class="group">
+    <section>
       <h2>2 · Layout</h2>
-      <div id="layoutRow" class="chip-row" role="radiogroup" aria-label="Panel layout"></div>
-      <p class="hint">Click a panel on the cover to select it, then drag to move the photo inside it. Scroll to zoom.</p>
-      <div class="sliders">
-        <label>Zoom <input id="zoomSlider" type="range" min="1" max="3" step="0.01" value="1.15"></label>
-        <label>Shift X <input id="panXSlider" type="range" min="-1" max="1" step="0.01" value="0"></label>
-        <label>Shift Y <input id="panYSlider" type="range" min="-1" max="1" step="0.01" value="0"></label>
-      </div>
-      <div class="panel-row">
-        <span>Panel:</span>
-        <div id="panelPicker" class="chip-row"></div>
-      </div>
-    </div>
+      <div id="layout-pick" class="pick-grid"></div>
+    </section>
 
-    <div class="group">
-      <h2>3 · Words</h2>
-      <label>Title
-        <input id="titleInput" type="text" maxlength="24" value="NEON COAST">
-      </label>
-      <label>Subtitle (neon script)
-        <input id="subtitleInput" type="text" maxlength="48" value="one helmet, two sunsets">
-      </label>
-      <label>Badge ribbon
-        <input id="badgeInput" type="text" maxlength="32" value="NEON COAST &bull; EST. 2026">
-      </label>
-      <label>Title style
-        <select id="titleStyle">
-          <option value="gradient" selected>Sunset gradient</option>
-          <option value="solid">Solid white</option>
-          <option value="outline">Neon outline</option>
-        </select>
-      </label>
-      <label>Heat meter
-        <select id="heatSelect">
-          <option value="5" selected>★★★★★ blazing</option>
-          <option value="4">★★★★☆ hot</option>
-          <option value="3">★★★☆☆ warm</option>
-        </select>
-      </label>
-    </div>
+    <section>
+      <h2>3 · Grade</h2>
+      <div id="grade-pick" class="pick-grid"></div>
+    </section>
 
-    <div class="group">
-      <h2>4 · Grade &amp; finish</h2>
-      <div id="gradeRow" class="grade-row" role="radiogroup" aria-label="Colour grade"></div>
-      <label class="check"><input id="grainCheck" type="checkbox" checked> Film grain</label>
-      <label class="check"><input id="halftoneCheck" type="checkbox" checked> Halftone title block</label>
-      <label class="check"><input id="vignetteCheck" type="checkbox" checked> Vignette</label>
-    </div>
-
-    <div class="group export-group">
-      <h2>5 · Export PNG</h2>
-      <label>Post size
-        <select id="sizeSelect">
-          <option value="1920x1080" selected>1920 × 1080 — landscape post</option>
-          <option value="1080x1350">1080 × 1350 — portrait post</option>
-          <option value="1080x1080">1080 × 1080 — square post</option>
-        </select>
+    <section>
+      <h2>4 · Lettering</h2>
+      <label class="field">Title
+        <input id="in-title" type="text" value="NEON COAST" maxlength="24" autocomplete="off">
       </label>
-      <button id="exportBtn" type="button" class="primary big">Export PNG</button>
-      <button id="exportAllBtn" type="button">Export all 3 sizes</button>
-      <p id="status" role="status"></p>
+      <label class="field">Subtitle
+        <input id="in-subtitle" type="text" value="two friends, one sunset" maxlength="48" autocomplete="off">
+      </label>
+      <label class="field">Badge ribbon
+        <input id="in-badge" type="text" value="NEON COAST" maxlength="18" autocomplete="off">
+      </label>
+      <label class="field">Heat meter
+        <span class="range-row"><input id="in-stars" type="range" min="0" max="5" step="1" value="5"><output id="out-stars">★★★★★</output></span>
+      </label>
+    </section>
+
+    <section>
+      <h2>5 · Finish</h2>
+      <label class="check"><input id="opt-grain" type="checkbox" checked> Film grain</label>
+      <label class="check"><input id="opt-vignette" type="checkbox" checked> Vignette</label>
+      <label class="check"><input id="opt-halftone" type="checkbox" checked> Halftone title block</label>
+    </section>
+  </aside>
+
+  <section class="stage-wrap">
+    <div class="stage-bar">
+      <span id="stage-hint">Click a panel to select it · drag to pan · scroll to zoom</span>
+      <span id="stage-size" class="stage-size">1920 × 1080</span>
+    </div>
+    <div id="stage-frame" class="stage-frame">
+      <canvas id="stage" width="960" height="540"></canvas>
+    </div>
+    <div class="inspector" aria-label="Selected panel">
+      <strong id="inspector-title">Panel 1</strong>
+      <label class="field inline">Photo
+        <select id="sel-photo"></select>
+      </label>
+      <label class="field inline">Zoom
+        <input id="in-zoom" type="range" min="1" max="3" step="0.01" value="1">
+      </label>
+      <label class="field inline">Shift X
+        <input id="in-ox" type="range" min="-0.5" max="0.5" step="0.01" value="0">
+      </label>
+      <label class="field inline">Shift Y
+        <input id="in-oy" type="range" min="-0.5" max="0.5" step="0.01" value="0">
+      </label>
+      <button id="btn-shuffle" class="btn" type="button">Shuffle photos</button>
     </div>
   </section>
 
-  <section class="stage" aria-label="Live cover preview">
-    <div class="canvas-wrap">
-      <canvas id="cover" width="1920" height="1080" aria-label="Live cover preview"></canvas>
-      <div id="panelHint" class="panel-hint">Panel 1 selected — drag the photo, scroll to zoom</div>
-    </div>
-    <p class="stage-note">Live preview — what you see is exactly what the PNG will be. Original art, original lettering; no Rockstar logos, artwork or fonts.</p>
-  </section>
+  <aside class="panel export-panel" aria-label="Export">
+    <section>
+      <h2>6 · Export PNG</h2>
+      <div class="size-pick" id="size-pick" role="radiogroup" aria-label="Export size"></div>
+      <button id="btn-export" class="btn btn-export" type="button">↓ Export this size</button>
+      <button id="btn-export-all" class="btn" type="button">↓ Export all three sizes</button>
+      <p id="export-status" class="status" role="status">Ready. Exports are exact-size PNGs.</p>
+      <p class="hint">Tip: exports need a plain HTTP server (for example <code>node serve.ts</code>) — browsers block canvas export from <code>file://</code> pages. The preview works from <code>file://</code> too.</p>
+    </section>
+    <section class="about">
+      <h2>About the art</h2>
+      <p>The three sample photos are original flat illustrations made for this studio — no real people, no game artwork. Lettering is <strong>Anton</strong> and <strong>Pacifico</strong> under the SIL Open Font License (see <code>fonts/OFL.txt</code>).</p>
+    </section>
+  </aside>
 </main>
 
-<script src="./app.js"></script>
+<footer class="foot">Neon Coast Cover Studio · your photos never leave this machine · no network requests</footer>
+<script src="app.js"></script>
 </body>
 </html>
