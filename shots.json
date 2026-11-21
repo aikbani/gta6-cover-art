@@ -1,1 +1,27 @@
-[{"h":720,"name":"1-cover.jpg","query":"?shot=cover&photo=boardwalk&caption=NEON%20COAST&layout=hero&grade=sunset&size=1920x1080&multi=1","w":1280},{"h":720,"name":"2-editor.jpg","query":"?shot=editor&photo=boardwalk&caption=NEON%20COAST&layout=hero&grade=sunset&size=1920x1080&multi=1","w":1280},{"h":1280,"name":"3-cover.jpg","query":"?shot=cover&photo=pier&caption=GOLDEN%20HOUR&subtitle=one%20coffee%2C%20two%20friends&layout=nine&grade=golden&size=1080x1350&multi=1","w":1024},{"h":1024,"name":"4-cover.jpg","query":"?shot=cover&photo=neon-street&caption=NEON%20NIGHTS&subtitle=the%20last%20ice%20cream&layout=tilted&grade=neon&size=1080x1080&multi=1","w":1024}]
+[
+  {
+    "description": "Hero cover exported at 1920x1080: hero-plus-trio layout in the Vice Sunset grade.",
+    "file": "1-cover.jpg",
+    "height": 720,
+    "id": "cover-hero",
+    "width": 1280
+  },  {
+    "description": "The editor with a photo loaded: layout and grade pickers, caption fields, and live preview.",
+    "file": "2-editor.jpg",
+    "height": 720,
+    "id": "editor",
+    "width": 1280
+  },  {
+    "description": "Nine-grid cover exported at 1080x1350 portrait in the Neon Night grade.",
+    "file": "3-cover.jpg",
+    "height": 1280,
+    "id": "cover-nine-grid",
+    "width": 1024
+  },  {
+    "description": "Tilted-snapshots cover exported at 1080x1080 square in the Ink Magenta duotone.",
+    "file": "4-cover.jpg",
+    "height": 1024,
+    "id": "cover-tilted",
+    "width": 1024
+  }
+]
